@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <ExternalIncludePath>C:\Users\86178\Documents\GitHub\PROJECT\X01-HERROR\HERROR\deps\glfw\include;C:\Users\86178\Documents\GitHub\PROJECT\X01-HERROR\HERROR\deps\glad\include;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>C:\Users\86178\Documents\GitHub\PROJECT\X01-HERROR\HERROR\deps\glfw\lib;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>.\deps\glfw\include;.\deps\glad\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>.\deps\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
