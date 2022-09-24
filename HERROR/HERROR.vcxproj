@@ -144,6 +144,10 @@
   <ItemGroup>
     <ClCompile Include="deps\glad\glad.c" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\tools\xilog4cpp\XI_LOG.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\tools\xilog4cpp\XI_LOG.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
