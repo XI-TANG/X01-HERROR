@@ -24,10 +24,20 @@
     <ClCompile Include="src\tools\xilog4cpp\XI_LOG.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\readfiles\rfshader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tools\xilog4cpp\XI_LOG.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\readfiles\rfshader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\shadertest1.shader" />
+    <None Include="shaders\fragmenttest1.shader" />
   </ItemGroup>
 </Project>

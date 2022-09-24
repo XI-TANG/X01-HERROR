@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <ExternalIncludePath>.\deps\glfw\include;.\deps\glad\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>.\src;.\deps\glfw\include;.\deps\glad\include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>.\deps\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,11 +143,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="deps\glad\glad.c" />
+    <ClCompile Include="src\readfiles\rfshader.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\tools\xilog4cpp\XI_LOG.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\readfiles\rfshader.h" />
     <ClInclude Include="src\tools\xilog4cpp\XI_LOG.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\fragmenttest1.shader" />
+    <None Include="shaders\shadertest1.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

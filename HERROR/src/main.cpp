@@ -2,6 +2,8 @@
 /* dependents lib */
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "tools/xilog4cpp/XI_LOG.h"
+#include "readfiles/rfshader.h"
 
 void error_callback(int error, const char* description);
 void close_callback(GLFWwindow* window);
@@ -9,6 +11,10 @@ void set_frame_buffer_callback(GLFWwindow* window, int width, int height);
 void key_info(GLFWwindow* window);
 
 int main() {
+
+	XI_LOG::XI_LOG(XI_LOG_TAG_Enum::XI_LOG_TAG_MAIN, XI_LOG_LVL_Enum::XI_LOG_LVL_INFO,"TEST LOG");
+	
+	rfshader::rfshader("./shaders/shadertest1.shader","./shaders/fragmenttest1.shader");
 
 	glfwSetErrorCallback(error_callback);
 
