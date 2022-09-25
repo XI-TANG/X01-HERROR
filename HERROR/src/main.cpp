@@ -112,4 +112,7 @@ void close_callback(GLFWwindow* window) {
 
 void set_frame_buffer_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }

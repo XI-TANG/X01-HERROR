@@ -46,8 +46,8 @@ rfshader::rfshader(const char* vertexPath, const char* fragmentPath)
 		vShaderCode = vertexCodeString.c_str();
 		fShaderCode = fragmentCodeString.c_str();
 
-		printf(vShaderCode);
-		printf(fShaderCode);
+		//printf(vShaderCode);
+		//printf(fShaderCode);
 
 		//2. compile shaders
 		unsigned int vertex, fragment;
@@ -55,14 +55,18 @@ rfshader::rfshader(const char* vertexPath, const char* fragmentPath)
 		vertex = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertex, 1, &vShaderCode, NULL);
 		glCompileShader(vertex);
+		checkCompileErrors(vertex, SHADER_CHECK_TYPE_Enum::SHADER_CHECK_TYPE_VERTEX);
 		// fragment Shader
 		fragment = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragment, 1, &fShaderCode, NULL);
 		glCompileShader(fragment);
+		checkCompileErrors(fragment, SHADER_CHECK_TYPE_Enum::SHADER_CHECK_TYPE_FRAGMENT);
+		//Program Shader
 		sahderProgramID = glCreateProgram();
 		glAttachShader(sahderProgramID, vertex);
 		glAttachShader(sahderProgramID, fragment);
 		glLinkProgram(sahderProgramID);
+		checkCompileErrors(sahderProgramID, SHADER_CHECK_TYPE_Enum::SHADER_CHECK_TYPE_PROGRAM);
 		// delete the shaders as they're linked into our program now and no longer necessary
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
@@ -79,4 +83,43 @@ rfshader::rfshader(const char* vertexPath, const char* fragmentPath)
 void rfshader::use()
 {
 	glUseProgram(sahderProgramID);
+}
+
+// utility function for checking shader compilation/linking errors.
+void rfshader::checkCompileErrors(unsigned int id, SHADER_CHECK_TYPE_Enum type)
+{
+	int success;
+	char infoLog[512];
+
+	const char* typeStr[3] = {
+		"VERTEX",
+		"FRAGMENT",
+		"PROGRAM"
+	};
+	//printf(typeStr[(int)type]);
+	switch (type)
+	{
+	case SHADER_CHECK_TYPE_Enum::SHADER_CHECK_TYPE_VERTEX:
+	case SHADER_CHECK_TYPE_Enum::SHADER_CHECK_TYPE_FRAGMENT:
+		glGetShaderiv(id, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(id, 512, NULL, infoLog);
+			std::cout << "\t\nERROR::PROGRAM_LINKING_ERROR of type: " 
+				<< typeStr[(int)type] << "\n" << infoLog << std::endl;
+		}
+		break;
+	case SHADER_CHECK_TYPE_Enum::SHADER_CHECK_TYPE_PROGRAM:
+		glGetProgramiv(id, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			glGetProgramInfoLog(id, 512, NULL, infoLog);
+			std::cout << "\t\nERROR::SHADER_COMPILATION_ERROR of type: " 
+				<< typeStr[(int)type] << "\n" << infoLog << std::endl;
+		}
+		break;
+	default:
+		printf("SHADER_CHECK: ERROR TYPE\t\n");
+		break;
+	}
 }
