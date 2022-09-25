@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <ExternalIncludePath>.\src;.\deps\glfw\include;.\deps\glad\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>.\deps\glfw\include;.\deps\glad\include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>.\deps\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,15 +145,21 @@
     <ClCompile Include="deps\glad\glad.c" />
     <ClCompile Include="src\readfiles\rfshader.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\test.cpp" />
     <ClCompile Include="src\tools\xilog4cpp\XI_LOG.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="deps\std_image\std_image.h" />
     <ClInclude Include="src\readfiles\rfshader.h" />
     <ClInclude Include="src\tools\xilog4cpp\XI_LOG.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="shaders\fragmenttest1.fs" />
     <Text Include="shaders\shadertest1.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="iamge\test.png" />
+    <Image Include="src\container.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,8 +2,12 @@
 /* dependents lib */
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 #include "tools/xilog4cpp/XI_LOG.h"
 #include "readfiles/rfshader.h"
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "../deps/std_image/std_image.h"
 
 void error_callback(int error, const char* description);
 void close_callback(GLFWwindow* window);
@@ -11,6 +15,18 @@ void set_frame_buffer_callback(GLFWwindow* window, int width, int height);
 void key_info(GLFWwindow* window);
 
 int main() {
+
+	int width, height, nrChannels;
+	//这里的图片路径是使用图片相对于项目的路径
+	std::string str = "iamge/test.png";
+	unsigned char* data = stbi_load(str.c_str(), &width, &height, &nrChannels, 0);
+	if (!data) {
+		printf("Cannot load file image \nSTB Reason: %s\n",
+			stbi_failure_reason());
+		exit(0);
+	}
+	else{
+	}
 
 	XI_LOG::XI_LOG(XI_LOG_TAG_Enum::XI_LOG_TAG_MAIN, XI_LOG_LVL_Enum::XI_LOG_LVL_INFO,"TEST LOG");
 	
@@ -67,7 +83,7 @@ int main() {
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	//vs��fs�ļ���Ҫת��
+	//vs与fs文件不要转码
 	rfshader* testshader = new rfshader("./shaders/shadertest1.vs", "./shaders/fragmenttest1.fs");
 
 	while (!glfwWindowShouldClose(window)) {
