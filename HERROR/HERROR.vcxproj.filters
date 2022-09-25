@@ -37,7 +37,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\shadertest1.shader" />
-    <None Include="shaders\fragmenttest1.shader" />
+    <Text Include="shaders\fragmenttest1.fs" />
+    <Text Include="shaders\shadertest1.vs" />
   </ItemGroup>
 </Project>

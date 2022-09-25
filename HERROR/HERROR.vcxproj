@@ -152,8 +152,8 @@
     <ClInclude Include="src\tools\xilog4cpp\XI_LOG.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\fragmenttest1.shader" />
-    <None Include="shaders\shadertest1.shader" />
+    <Text Include="shaders\fragmenttest1.fs" />
+    <Text Include="shaders\shadertest1.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

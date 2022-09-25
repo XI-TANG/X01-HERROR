@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+
 /*
 * c++中的文件流：
 *	file in disk -> file buffer -> string buffer -> string -> char*
@@ -20,7 +21,7 @@ rfshader::rfshader(const char* vertexPath, const char* fragmentPath)
 
 	try
 	{
-		//打开文件
+		//1. 打开文件
 		if (!vShaderFile.is_open()) {
 			throw std::exception("open vertex file err");
 		}
@@ -47,6 +48,24 @@ rfshader::rfshader(const char* vertexPath, const char* fragmentPath)
 
 		printf(vShaderCode);
 		printf(fShaderCode);
+
+		//2. compile shaders
+		unsigned int vertex, fragment;
+		// vertex shader
+		vertex = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(vertex, 1, &vShaderCode, NULL);
+		glCompileShader(vertex);
+		// fragment Shader
+		fragment = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(fragment, 1, &fShaderCode, NULL);
+		glCompileShader(fragment);
+		sahderProgramID = glCreateProgram();
+		glAttachShader(sahderProgramID, vertex);
+		glAttachShader(sahderProgramID, fragment);
+		glLinkProgram(sahderProgramID);
+		// delete the shaders as they're linked into our program now and no longer necessary
+		glDeleteShader(vertex);
+		glDeleteShader(fragment);
 	}
 	catch (const std::exception& ex)
 	{
@@ -54,4 +73,10 @@ rfshader::rfshader(const char* vertexPath, const char* fragmentPath)
 		printf("\t\n");
 		printf("ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ\t\n");
 	}
+}
+
+// activate the shader
+void rfshader::use()
+{
+	glUseProgram(sahderProgramID);
 }
